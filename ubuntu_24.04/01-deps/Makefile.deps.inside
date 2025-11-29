@@ -196,8 +196,8 @@ $(BUILD):
 	mkdir -p $(BUILD)
 
 	mkdir -p $(BUILD)/include
-	mkdir -p $(BUILD)/lib/x86_64-linux-gnu
-	mkdir -p $(BUILD)/lib/x86_64-linux-gnu/pkgconfig
+	mkdir -p $(BUILD)/lib/aarch64-linux-gnu
+	mkdir -p $(BUILD)/lib/aarch64-linux-gnu/pkgconfig
 
 	mkdir -p $(BUILD)/share
 	mkdir -p $(BUILD)/share/pkgconfig
@@ -254,8 +254,8 @@ vkheaders: packages/vkheaders-$(VULKAN_LOADER_VERSION) $(BUILD)
 	cp -rP $(FROM)/libvulkan-dev/usr/. $(BUILD)/.
 
 	#hack, workaround what something i'm 99% sure is a libvulkan [packaging?] bug
-	sed -i -e 's|libdir=.*|libdir=$${exec_prefix}/lib/x86_64-linux-gnu|' \
-		$(BUILD)/lib/x86_64-linux-gnu/pkgconfig/vulkan.pc
+	sed -i -e 's|libdir=.*|libdir=$${exec_prefix}/lib/aarch64-linux-gnu|' \
+		$(BUILD)/lib/aarch64-linux-gnu/pkgconfig/vulkan.pc
 
 .PHONY: libsdl2
 libsdl2: FROM=packages/libsdl2-$${LIBSDL2_VERSION:?}/libsdl2-*/debian
@@ -267,8 +267,8 @@ libsdl2: packages/libsdl2-$(LIBSDL2_VERSION) $(BUILD)
 	cp -rP $(FROM)/libsdl2-dev/usr/. $(BUILD)/.
 
 	#hack, pretty sure this is jarrad not understanding sdl2 build process though
-	sed -i -e 's|-I\$${includedir}/SDL2|-I\$${includedir}/SDL2 -I\$${includedir}/x86_64-linux-gnu|' \
-		$(BUILD)/lib/x86_64-linux-gnu/pkgconfig/sdl2.pc
+	sed -i -e 's|-I\$${includedir}/SDL2|-I\$${includedir}/SDL2 -I\$${includedir}/aarch64-linux-gnu|' \
+		$(BUILD)/lib/aarch64-linux-gnu/pkgconfig/sdl2.pc
 
 .PHONY: libdecor-0
 libdecor-0: FROM=packages/libdecor-0-$${LIBDECOR0_VERSION:?}/libdecor-0-*/debian
@@ -295,7 +295,7 @@ xwayland: $(BUILD)
 	# instead of building all of xwayland from mantic or something, instead we just hack a pc
 	# for the focal version to keep meson happy.
 	# just what you wanted, heredoc in a oneshell in a makefile
-	cat > $(BUILD)/lib/x86_64-linux-gnu/pkgconfig/xwayland.pc <<-'EOF'
+	cat > $(BUILD)/lib/aarch64-linux-gnu/pkgconfig/xwayland.pc <<-'EOF'
 		prefix=/usr
 		exec_prefix=${prefix}
 

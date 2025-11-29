@@ -38,17 +38,17 @@ package: | $(PACKAGE_NAME).deb
 
 	# drop dodgy symlinks from the -dev packages
 	(
-		cd pkg_tmp/opt/gamescope/lib/x86_64-linux-gnu
+		cd pkg_tmp/opt/gamescope/lib/aarch64-linux-gnu
 		rm libwayland-client.so libwayland-egl.so libwayland-cursor.so
 	)
 
 	# fix perms
-	chmod ugo-x pkg_tmp/opt/gamescope/lib/x86_64-linux-gnu/*.so
+	chmod ugo-x pkg_tmp/opt/gamescope/lib/aarch64-linux-gnu/*.so
 
 	# patch rpath so we load bundled libs instead of system ones
 	(
 		cd pkg_tmp/opt/gamescope/bin
-		patchelf --set-rpath '$$ORIGIN/../lib/x86_64-linux-gnu' --force-rpath \
+		patchelf --set-rpath '$$ORIGIN/../lib/aarch64-linux-gnu' --force-rpath \
 			gamescope \
 			gamescopereaper \
 			gamescopestream \
@@ -104,7 +104,7 @@ compute-deps:
 	dpkg-shlibdeps \
 		-e ./$${PACKAGE_NAME:?}/opt/gamescope/bin/gamescope \
 		-v \
-		-l./$${PACKAGE_NAME:?}/opt/gamescope/lib/x86_64-linux-gnu \
+		-l./$${PACKAGE_NAME:?}/opt/gamescope/lib/aarch64-linux-gnu \
 		-xlibwayland-server0 \
 		-xlibwayland-client0 \
 		-xlibwayland-egl0 \
