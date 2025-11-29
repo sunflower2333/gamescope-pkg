@@ -33,4 +33,4 @@ github_release:
 		--title "v$${VERSION:?}" \
 		--notes-file gh_changelog \
 		--draft \
-		ubuntu_24.04/03-package/gamescope_$${VERSION:?}_amd64.deb
+		ubuntu_24.04/03-package/gamescope_$${VERSION:?}_arm64.deb

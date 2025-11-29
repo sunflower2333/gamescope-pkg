@@ -13,7 +13,7 @@ export DEB_RELEASE_SUFFIX := $(shell \
 )
 
 export PACKAGE_VERSION=$(GAMESCOPE_VERSION)-$(DEB_RELEASE)$(DEB_RELEASE_SUFFIX)
-export PACKAGE_NAME=gamescope_$(PACKAGE_VERSION)_amd64
+export PACKAGE_NAME=gamescope_$(PACKAGE_VERSION)_arm64
 
 .PHONY: default
 default: package

@@ -7,7 +7,7 @@ Vcs-Browser: https://github.com/akdor1154/gamescope-pkg
 Vcs-Git: https://github.com/akdor1154/gamescope-pkg
 
 Package: gamescope
-Architecture: amd64
+Architecture: arm64
 Depends: ${shlibs:Depends}, libcap2-bin
 Description: Micro-compositor for game scaling
  Unofficial package for the Gamescope compositor.
